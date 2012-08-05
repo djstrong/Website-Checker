@@ -1,0 +1,19 @@
+{
+  "name": "Site Checker",
+  "version": "0.1",
+  "description": "Shows number of regular expression matches on website with interval, e.g. show number of unread posts on phpBB forum.",
+  "background": {
+    "scripts": ["bg.js"]
+  },
+  "options_page": "options.html",
+  "icons": { "128": "icon_fc.png" },
+  "permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+  "browser_action": {
+    "default_icon": "icon_fc.png",
+    "default_popup": "popup.html"
+  },
+  "manifest_version": 2
+}
