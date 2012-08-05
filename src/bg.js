@@ -1,0 +1,72 @@
+var ForumChecker = function() {
+  var fc = {};
+  fc.start = function() {
+    chrome.browserAction.setBadgeText({text:"init"});
+    chrome.browserAction.setBadgeBackgroundColor({color:[255, 0, 0, 255]});
+    if (localStorage["titles"] == null) localStorage["titles"] = JSON.stringify(Array());
+    if (localStorage["links"] == null) localStorage["links"] = JSON.stringify(Array());
+    if (localStorage["regexps"] == null) localStorage["regexps"] = JSON.stringify(Array());
+    if (localStorage["counts"] == null) localStorage["counts"] = JSON.stringify(Array());
+    if (localStorage["interval"] == null) localStorage["interval"] = 60;
+  };
+
+  fc.c = 0;
+  fc.run = function() {
+    var titles = JSON.parse(localStorage["titles"]);
+    var links = JSON.parse(localStorage["links"]);
+    var regexps = JSON.parse(localStorage["regexps"]);
+    var counts = JSON.parse(localStorage["counts"]);
+    
+    
+    if (titles.length>0) {
+      try {
+	console.log(titles[fc.c]+new Date());
+	var response = doCall(links[fc.c]);
+	var m = response.match(new RegExp(regexps[fc.c], "g"));
+	console.log(m.length);
+	
+	counts[fc.c] = m.length;
+	
+	if (m.length>0) {
+	  chrome.browserAction.setIcon({path:"icon_fc.png"}); //for no favicons
+	  chrome.browserAction.setIcon({path:getFavicon(links[fc.c])});
+	  chrome.browserAction.setBadgeBackgroundColor({color:[0, 127, 255, 255]});
+	  chrome.browserAction.setBadgeText({text:m.length+''});
+	}
+      }
+      catch (e) {
+	console.log('error'+new Date()); 
+	counts[fc.c] = "error";
+      }
+      localStorage["counts"] = JSON.stringify(counts);
+      
+      fc.c= (fc.c + 1) % titles.length;
+    
+      setTimeout(fc.run, localStorage["interval"]*1000);
+    }
+    else {
+      setTimeout(fc.run, 2000);
+    }
+    
+  };
+
+  var http = new XMLHttpRequest();
+  
+  //TODO: timeout not working, make asynchronous?
+  function doCall(link) {
+    http.open("GET", link, false );
+    http.timeout = 3000;
+    http.send( null );
+    return http.responseText;
+  }
+
+  function getFavicon(url) {
+    var a = document.createElement('a');
+    a.href = url;
+    return "http://"+a.hostname+"/favicon.ico";
+  }
+  
+  setTimeout(fc.run, 1000);
+  return fc;
+}();
+ForumChecker.start()
