@@ -9,6 +9,7 @@ function present() {
   var links = JSON.parse(localStorage["links"]);
   var regexps = JSON.parse(localStorage["regexps"]);
   var counts = JSON.parse(localStorage["counts"]);
+  var icons = JSON.parse(localStorage["icons"]);
 
   document.getElementById("content").innerHTML = "";
 
@@ -22,7 +23,10 @@ function present() {
   
     img = document.createElement("img");
     img.className = "icon";
-    img.src = getFavicon(links[i]);
+    if (icons[i]=='')
+      img.src = getFavicon(links[i]);
+    else
+      img.src = icons[i];
     img.height = 32;
     a.appendChild(img);
     
@@ -31,6 +35,10 @@ function present() {
     a.appendChild(span);
     
     div.appendChild(a);
+    
+    spacer = document.createElement("div");
+    spacer.className = 'spacer';
+    div.appendChild(spacer);
     
     document.getElementById("content").appendChild(div);
     

@@ -7,6 +7,7 @@ var ForumChecker = function() {
     if (localStorage["links"] == null) localStorage["links"] = JSON.stringify(Array());
     if (localStorage["regexps"] == null) localStorage["regexps"] = JSON.stringify(Array());
     if (localStorage["counts"] == null) localStorage["counts"] = JSON.stringify(Array());
+    if (localStorage["icons"] == null) localStorage["icons"] = JSON.stringify(Array());
     if (localStorage["interval"] == null) localStorage["interval"] = 60;
   };
 
@@ -16,6 +17,7 @@ var ForumChecker = function() {
     var links = JSON.parse(localStorage["links"]);
     var regexps = JSON.parse(localStorage["regexps"]);
     var counts = JSON.parse(localStorage["counts"]);
+    var icons = JSON.parse(localStorage["icons"]);
     
     
     if (titles.length>0) {
@@ -29,7 +31,10 @@ var ForumChecker = function() {
 	
 	if (m.length>0) {
 	  chrome.browserAction.setIcon({path:"icon_fc.png"}); //for no favicons
-	  chrome.browserAction.setIcon({path:getFavicon(links[fc.c])});
+	  if (icons[fc.c]=='')
+	    chrome.browserAction.setIcon({path:getFavicon(links[fc.c])});
+	  else
+	    chrome.browserAction.setIcon({path:icons[fc.c]});
 	  chrome.browserAction.setBadgeBackgroundColor({color:[0, 127, 255, 255]});
 	  chrome.browserAction.setBadgeText({text:m.length+''});
 	}
