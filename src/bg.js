@@ -8,6 +8,7 @@ var ForumChecker = function() {
     if (localStorage["regexps"] == null) localStorage["regexps"] = JSON.stringify(Array());
     if (localStorage["counts"] == null) localStorage["counts"] = JSON.stringify(Array());
     if (localStorage["icons"] == null) localStorage["icons"] = JSON.stringify(Array());
+    if (localStorage["countMatches"] == null) localStorage["countMatches"] = JSON.stringify(Array());
     if (localStorage["interval"] == null) localStorage["interval"] = 60;
   };
 
@@ -18,25 +19,33 @@ var ForumChecker = function() {
     var regexps = JSON.parse(localStorage["regexps"]);
     var counts = JSON.parse(localStorage["counts"]);
     var icons = JSON.parse(localStorage["icons"]);
-    
+    var countMatches = JSON.parse(localStorage["countMatches"]);    
     
     if (titles.length>0) {
       try {
-	console.log(titles[fc.c]+new Date());
+	console.log(titles[fc.c]+' '+new Date());
 	var response = doCall(links[fc.c]);
-	var m = response.match(new RegExp(regexps[fc.c], "g"));
-	console.log(m.length);
+	var m, show = false;
 	
-	counts[fc.c] = m.length;
+	if (countMatches[fc.c]) {
+	  m = response.match(new RegExp(regexps[fc.c], "g"));
+	  counts[fc.c] = m.length;
+	  if (m.length>0) show = true;
+	}
+	else {
+	  m = response.match(new RegExp(regexps[fc.c]));
+	  counts[fc.c] = m[1];
+	  show = true;
+	}
 	
-	if (m.length>0) {
+	if (show) {
 	  chrome.browserAction.setIcon({path:"icon_fc.png"}); //for no favicons
 	  if (icons[fc.c]=='')
 	    chrome.browserAction.setIcon({path:getFavicon(links[fc.c])});
 	  else
 	    chrome.browserAction.setIcon({path:icons[fc.c]});
 	  chrome.browserAction.setBadgeBackgroundColor({color:[0, 127, 255, 255]});
-	  chrome.browserAction.setBadgeText({text:m.length+''});
+	  chrome.browserAction.setBadgeText({text:counts[fc.c]+''});
 	}
       }
       catch (e) {
