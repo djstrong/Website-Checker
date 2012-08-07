@@ -1,4 +1,13 @@
 //TODO: predefined entries
+function Entry() {
+  this.title = ""
+  this.link = ""
+  this.regexp = ""
+  this.badge = ""
+  this.icon = ""
+  this.countMatch = ""
+}
+
 function strStartsWith(str, prefix) {
     return str.indexOf(prefix) === 0;
 }
@@ -20,14 +29,10 @@ function saveOptions() {
   var regexps = document.form.elements["regexps[]"];
   var icons = document.form.elements["icons[]"];
   var countMatches = document.form.elements["countMatches[]"];
-  
-  var title, link, regexp, icon, countMatch;
-  var ts = Array();
-  var ls = Array();
-  var rs = Array();
-  var is = Array();
-  var cs = Array();
+
+  var entries = Array();
   console.log('save'+titles.length);
+  
   for(i=0;i<titles.length;++i) {
     title = titles[i].value;
     link = links[i].value;
@@ -42,40 +47,43 @@ function saveOptions() {
 	regexps[i].select();
 	alert('Regular expression is invalid.');
       }
-      ts.push(title)
-      ls.push(fixLink(link))
-      rs.push(regexp)
-      is.push(fixLink(icon));
-      cs.push(countMatch);
+      
+      entry = new Entry()
+      entry.title = title
+      entry.link = link
+      entry.regexp = regexp
+      entry.icon = icon
+      entry.countMatch = countMatch
+      entries.push(entry);
     }
   }
-
-  localStorage["titles"] = JSON.stringify(ts);
-  localStorage["links"] = JSON.stringify(ls);
-  localStorage["regexps"] = JSON.stringify(rs);
-  localStorage["icons"] = JSON.stringify(is);
-  localStorage["countMatches"] = JSON.stringify(cs);
+  localStorage["entries"] = JSON.stringify(entries);
 }
 
 function restoreOptions() {
   var interval = localStorage["interval"];
   document.getElementById("interval").value = interval
 
-  var titles = JSON.parse(localStorage["titles"]);
-  var links = JSON.parse(localStorage["links"]);
-  var regexps = JSON.parse(localStorage["regexps"]);
-  var icons = JSON.parse(localStorage["icons"]);
-  var countMatches = JSON.parse(localStorage["countMatches"]);
+  var entries = JSON.parse(localStorage["entries"]);
   
-  for(i=0;i<titles.length;++i) {
-    addNewLink(titles[i], links[i], regexps[i], icons[i], countMatches[i]);
+  for(i=0;i<entries.length;++i) {
+    addNewLink(entries[i]);
   }
 
-  addNewLink('', '', 'topictitle', '', true);
-  addNewLink('', '', 'topictitle', '', true);
+  entry = new Entry()
+  entry.regexp = "topictitle"
+  entry.countMatch = true
+  addNewLink(entry);
+  addNewLink(entry);
 }
 
-function addNewLink(title, link, regexp, icon, countMatch){
+function addNewLink(entry){
+  var title = entry.title
+  var link = entry.link
+  var regexp = entry.regexp
+  var icon = entry.icon
+  var countMatch = entry.countMatch
+  
   var div = document.createElement('div');
   
   var img = document.createElement("h3");
@@ -181,7 +189,10 @@ function addNewLink(title, link, regexp, icon, countMatch){
 }
 
 function clickAddHandler(e) {
-  addNewLink('', '', 'topictitle', '', true);
+  entry = new Entry()
+  entry.regexp = "topictitle"
+  entry.countMatch = true
+  addNewLink(entry);
 }
 
 function clickSaveHandler(e) {

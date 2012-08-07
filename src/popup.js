@@ -5,33 +5,29 @@ function getFavicon(url) {
 }
 
 function present() {
-  var titles = JSON.parse(localStorage["titles"]);
-  var links = JSON.parse(localStorage["links"]);
-  var regexps = JSON.parse(localStorage["regexps"]);
-  var counts = JSON.parse(localStorage["counts"]);
-  var icons = JSON.parse(localStorage["icons"]);
-
+  var entries = JSON.parse(localStorage["entries"]);
+  
   document.getElementById("content").innerHTML = "";
 
-  for(i=0;i<titles.length;++i) {
+  for(i=0;i<entries.length;++i) {
     
     div = document.createElement("div");
     
     a = document.createElement("a");
     a.target = "_blank";
-    a.href = links[i];
+    a.href = entries[i].link;
   
     img = document.createElement("img");
     img.className = "icon";
-    if (icons[i]=='')
-      img.src = getFavicon(links[i]);
+    if (entries[i].icon=='')
+      img.src = getFavicon(entries[i].link);
     else
-      img.src = icons[i];
+      img.src = entries[i].icon;
     img.height = 32;
     a.appendChild(img);
     
     span = document.createElement("span");
-    span.innerHTML = " " + titles[i] + ": " + counts[i];
+    span.innerHTML = " " + entries[i].title + ": " + entries[i].badge;
     a.appendChild(span);
     
     div.appendChild(a);
