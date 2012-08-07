@@ -1,3 +1,4 @@
+//TODO: blinking icon or colors
 var ForumChecker = function() {
   var fc = {};
   fc.start = function() {
@@ -29,8 +30,12 @@ var ForumChecker = function() {
 	
 	if (countMatches[fc.c]) {
 	  m = response.match(new RegExp(regexps[fc.c], "g"));
-	  counts[fc.c] = m.length;
-	  if (m.length>0) show = true;
+	  if (m==null)
+	    counts[fc.c]=0;
+	  else {
+	    counts[fc.c] = m.length;
+	    show = true;
+	  }
 	}
 	else {
 	  m = response.match(new RegExp(regexps[fc.c]));
@@ -49,7 +54,7 @@ var ForumChecker = function() {
 	}
       }
       catch (e) {
-	console.log('error'+new Date()); 
+	console.log('error '+new Date()+' '+e); 
 	counts[fc.c] = "error";
       }
       localStorage["counts"] = JSON.stringify(counts);

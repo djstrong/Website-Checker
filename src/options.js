@@ -1,3 +1,4 @@
+//TODO: predefined entries
 function strStartsWith(str, prefix) {
     return str.indexOf(prefix) === 0;
 }
@@ -5,7 +6,7 @@ function strStartsWith(str, prefix) {
 function fixLink(link) {
   if (link=='') return link;
   
-  if (!strStartsWith(link, 'http://')) link = 'http://' + link;
+  if (!strStartsWith(link, 'http://') && !strStartsWith(link, 'https://')) link = 'http://' + link;
   var a = document.createElement('a');
   a.href = link;
   return a.href;
