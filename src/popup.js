@@ -40,13 +40,13 @@ function present() {
     
   }
   
-  if (titles.length==0) {
+  if (entries.length==0) {
     div = document.createElement("div");
     div.innerHTML = "You have to add some websites. Right click on the icon and click <i>Options</i>.";
     document.getElementById("content").appendChild(div);
   }
   
-  setTimeout(present, 10000);
+  setTimeout(present, localStorage["interval"]*500);
 }
 
 document.addEventListener('DOMContentLoaded', function () {

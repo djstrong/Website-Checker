@@ -7,7 +7,7 @@
 	font-family:"Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif;
 	font-size:20px;
       }
-      #contactform {
+      .contactform {
 	width: 500px;
 	padding: 20px;
 	background: #f0f0f0;
@@ -101,18 +101,49 @@ input{
     </style>
   </head>
   <body>
-    <form name="form" id="contactform">
+    <form id="contactform2" class="contactform">
+      <h3>Options</h3>
       <div class="field">
 	<label>Interval:</label>
 	<input type="text" id="interval" value="60" />
 	<p class="hint">Seconds between requests</p>
       </div>
-      <br />
-      <div id="forms">
+      <input class="button" type="button" id="save2" value="Save" /><br />
+    </form>
+    <form name="form" id="contactform" class="contactform">
+      <h3>Website entry: <span id="index"></span></h3>
+      	<select id="predefined">
+	</select>
+      <div class="field">
+	<label>Title:</label>
+	<input type="text" id="title" value="" />
+	<p class="hint"></p>
       </div>
-      <input class="button" type="button" id="save" value="Save" /><br />
-      <input class="button" type="button" id="add" value="Add new link" />
+      <div class="field">
+	<label>Link:</label>
+	<input type="text" id="link" value="" />
+	<p class="hint">Format: http://www.google.com/ (prefix http:// and ending with slash is needed)</p>
+      </div>
+      <div class="field">
+	<label>RegExp:</label>
+	<input type="text" id="regexp" value="" />
+	<p class="hint">Regular expression</p>
+      </div>
+      <div class="field">
+	<label>Icon:</label>
+	<input type="text" id="icon" value="" />
+	<p class="hint">Url to icon. Optional, leave empty to use standard favicon.</p>
+      </div>
+      <div class="field">
+	<label>Count:</label>
+	<input type="checkbox" id="countMatch" value="" />
+	<p class="hint">Unselect to simply show match (group 1), otherwise count matches.</p>
+      </div>
+      <input class="button" type="button" id="save" value="Save" />
+      <input class="button" type="button" id="remove" value="Remove" />
       
+      <input class="button" type="button" id="prev" value="Previous" />
+      <input class="button" type="button" id="next" value="Next" />
     </form>
     <br />
     <b>Interval</b> is a time between requests. Also icons are rotating with this interval.<br />
