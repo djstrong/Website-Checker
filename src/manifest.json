@@ -1,7 +1,7 @@
 {
   "name": "Website Checker",
-  "version": "0.3.1",
-  "description": "Shows number of regular expression matches on website with interval, e.g. show number of unread posts on phpBB forum.",
+  "version": "0.3.2",
+  "description": "Displays a number of events from sequent websites over the icons. It can be a number of items or defined text match.",
   "background": {
     "scripts": ["bg.js"]
   },
