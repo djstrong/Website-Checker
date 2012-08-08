@@ -3,6 +3,8 @@ Website Checker
 
 Displays a number of events from sequent websites over the icons. It can be a number of items or defined text match.
 
+Link to Chrome Web Store: https://chrome.google.com/webstore/detail/kakkbokkaailehpiejdgojgejgmedfme
+
 E.g: shows number of unread posts from forum or Gmail account.
 * checks websites with defined interval
 * uses regular expressions - displays a number of matches or first group of match
