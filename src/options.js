@@ -1,3 +1,4 @@
+//TODO: add testing entry in options
 function Entry() {
   this.title = ""
   this.link = ""

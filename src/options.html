@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>Site Checker - Options</title>
+    <title>Website Checker - Options</title>
     <script src="options.js"></script>
     <style type="text/css">
       body {
@@ -36,7 +36,7 @@
       line-height: 25px;
       font-size: 15px;
     }
-input{
+input, select{
     font-family: Arial, Verdana;
     font-size: 15px;
     padding: 5px;
@@ -112,8 +112,12 @@ input{
     </form>
     <form name="form" id="contactform" class="contactform">
       <h3>Website entry: <span id="index"></span></h3>
+      <div class="field">
+	<label>Predefined:</label>
       	<select id="predefined">
 	</select>
+	<p class="hint">Predefined templates</p>
+      </div>
       <div class="field">
 	<label>Title:</label>
 	<input type="text" id="title" value="" />
