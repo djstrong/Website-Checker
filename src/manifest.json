@@ -1,6 +1,6 @@
 {
   "name": "Website Checker",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "Displays a number of events from sequent websites over the icons. It can be a number of items or defined text match.",
   "background": {
     "scripts": ["bg.js"]
@@ -15,5 +15,6 @@
     "default_icon": "icon_fc.png",
     "default_popup": "popup.html"
   },
-  "manifest_version": 2
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
 }

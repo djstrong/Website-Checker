@@ -1,3 +1,12 @@
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-34191277-4']);
+_gaq.push(['_trackPageview']);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = 'https://ssl.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
 function Entry() {
   this.title = ""
   this.link = ""
@@ -24,6 +33,8 @@ var ForumChecker = function() {
 
     if (localStorage["interval"] == null) localStorage["interval"] = 60;
     if (localStorage["entries"] == null) localStorage["entries"] = JSON.stringify(Array());
+    
+    _gaq.push(['_trackEvent', 'Background', 'Start function', JSON.parse(localStorage["entries"]).length]);
   };
 
   fc.c = 0;
@@ -92,8 +103,10 @@ var ForumChecker = function() {
       }
       localStorage["entries"] = JSON.stringify(entries);
       
+      _gaq.push(['_trackEvent', 'Background', 'Run function', fc.c]);
+      
       fc.c= (fc.c + 1) % entries.length;
-    
+      
       setTimeout(fc.run, localStorage["interval"]*1000);
     }
     else {

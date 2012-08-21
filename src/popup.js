@@ -1,3 +1,11 @@
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-34191277-4']);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = 'https://ssl.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
 function getFavicon(url) {
   var a = document.createElement('a');
   a.href = url;
@@ -6,6 +14,7 @@ function getFavicon(url) {
 
 function present() {
   var entries = JSON.parse(localStorage["entries"]);
+  _gaq.push(['_trackEvent', 'Popup', 'Number of entries', entries.length]);
   
   document.getElementById("content").innerHTML = "";
 

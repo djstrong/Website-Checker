@@ -94,6 +94,14 @@ function showPredefined() {
   entry.countMatch = false
   predefinedEntries.push(entry)
   
+  entry = new Entry()
+  entry.title = "Gmail unread mails (Polish)"
+  entry.link = "https://mail.google.com/mail/u/0/x/"
+  entry.regexp = "Odebrane &nbsp;\\(([0-9]+)\\)"
+  entry.icon = ""
+  entry.countMatch = false
+  predefinedEntries.push(entry)
+  
   var predefined = document.getElementById('predefined');
   for (i=0; i<predefinedEntries.length; ++i) {
     var option = document.createElement('option');
