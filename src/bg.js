@@ -34,7 +34,7 @@ var ForumChecker = function() {
     if (localStorage["interval"] == null) localStorage["interval"] = 60;
     if (localStorage["entries"] == null) localStorage["entries"] = JSON.stringify(Array());
     
-    _gaq.push(['_trackEvent', 'Background', 'Start function', JSON.parse(localStorage["entries"]).length]);
+    _gaq.push(['_trackEvent', 'Background', 'Start function', 'Number of entries', JSON.parse(localStorage["entries"]).length]);
   };
 
   fc.c = 0;
@@ -103,7 +103,7 @@ var ForumChecker = function() {
       }
       localStorage["entries"] = JSON.stringify(entries);
       
-      _gaq.push(['_trackEvent', 'Background', 'Run function', fc.c]);
+      _gaq.push(['_trackEvent', 'Background', 'Run function', 'Index of entry', fc.c]);
       
       fc.c= (fc.c + 1) % entries.length;
       

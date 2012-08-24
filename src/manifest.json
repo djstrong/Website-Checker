@@ -1,6 +1,6 @@
 {
   "name": "Website Checker",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "Displays a number of events from sequent websites over the icons. It can be a number of items or defined text match.",
   "background": {
     "scripts": ["bg.js"]

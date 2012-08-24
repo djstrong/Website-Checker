@@ -14,7 +14,7 @@ function getFavicon(url) {
 
 function present() {
   var entries = JSON.parse(localStorage["entries"]);
-  _gaq.push(['_trackEvent', 'Popup', 'Number of entries', entries.length]);
+  _gaq.push(['_trackEvent', 'Popup', 'Present function', 'Number of entries', entries.length]);
   
   document.getElementById("content").innerHTML = "";
 
